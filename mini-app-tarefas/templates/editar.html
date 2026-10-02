@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Editar tarefa | Mini App de Tarefas{% endblock %}
+
+{% block content %}
+<section class="card formulario-card">
+    <div class="editar-topo">
+        <div>
+            <h2>Editar tarefa</h2>
+            <p>Atualize as informações abaixo.</p>
+        </div>
+        <a href="{{ url_for('index') }}" class="voltar">← Voltar</a>
+    </div>
+
+    <form method="post" class="formulario">
+        <div class="campo">
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" name="titulo" maxlength="120" value="{{ tarefa['titulo'] }}" required>
+        </div>
+
+        <div class="campo">
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao" name="descricao" rows="4">{{ tarefa['descricao'] or '' }}</textarea>
+        </div>
+
+        <div class="campo">
+            <label for="status">Status</label>
+            <select id="status" name="status">
+                <option value="Pendente" {% if tarefa['status'] == 'Pendente' %}selected{% endif %}>Pendente</option>
+                <option value="Concluída" {% if tarefa['status'] == 'Concluída' %}selected{% endif %}>Concluída</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-principal">Salvar alterações</button>
+    </form>
+</section>
+{% endblock %}
